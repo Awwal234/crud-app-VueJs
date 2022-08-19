@@ -1,5 +1,6 @@
 <template>
   <main>
+    <div id="retrievedTasky"></div>
     <div class="mx-auto mt-[100px] w-[90%] bg-gray-900 p-[20px] rounded-xl">
       <h1 class="text-white font-bold font-sans text-[25px]">Task List</h1>
       <form class="w-[100%] flex mt-[20px]" id="new-task-form">
@@ -23,6 +24,9 @@
     const form = document.getElementById("new-task-form");
     const input = document.getElementById("new-task-input");
     const list_el = document.getElementById("tasks");
+
+    var retrievedTasky = document.getElementById("retrievedTasky");
+    retrievedTasky.innerText = "Last Retrieved: " + localStorage.getItem("Task");
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -70,16 +74,26 @@
 
       input.value = "";
 
+      localStorage.setItem("Task", JSON.stringify(task_input_el.value))
+      var retrievedTask = localStorage.getItem("Task");
+      console.log(retrievedTask);
+
+      for(let i=0; i<localStorage.length; i++){
+        console.log(localStorage);
+      }
+
       task_edit_el.addEventListener("click", () => {
         if(task_edit_el.innerText.toLowerCase() == "edit") {
           task_input_el.focus();
           task_edit_el.innerText = "Save";
           task_input_el.removeAttribute("readonly");
+          localStorage.setItem("Task", JSON.stringify(task_input_el.value))
         }
         else {
           // task_content_el.innerText = task_input_el.value
           task_edit_el.innerText = "Edit"
           task_input_el.setAttribute("readonly", "readonly");
+          localStorage.removeItem("Task", JSON.stringify(task_input_el.value))
         }
       })
 
@@ -88,6 +102,8 @@
       })
     })
   })
+
+  alert(localStorage.getItem("Task"));
 </script>
 
 <style>
