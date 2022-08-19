@@ -93,7 +93,7 @@
           // task_content_el.innerText = task_input_el.value
           task_edit_el.innerText = "Edit"
           task_input_el.setAttribute("readonly", "readonly");
-          localStorage.removeItem("Task", JSON.stringify(task_input_el.value))
+          localStorage.setItem("Task", JSON.stringify(task_input_el.value))
         }
       })
 
