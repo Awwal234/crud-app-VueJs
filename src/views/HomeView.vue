@@ -102,8 +102,6 @@
       })
     })
   })
-
-  alert(localStorage.getItem("Task"));
 </script>
 
 <style>
